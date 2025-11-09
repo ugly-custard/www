@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ParticleBackground } from "@/components/background/particle-background";
+import { TerminalWindow } from "@/components/terminal/terminal-window";
+import { TerminalProvider } from "@/contexts/terminal-context";
 
 export const metadata: Metadata = {
-  title: "ugly-custard",
+  title: "ugly@custard",
   description: "My portfolio",
 };
 
@@ -27,9 +29,13 @@ export default function RootLayout({
 
         <ParticleBackground quantity={500} size={0.4} />
 
-        <div className="flex min-h-screen items-center justify-center">
-          {children}
-        </div>
+        <TerminalProvider>
+          <div className="flex min-h-screen items-center justify-center">
+            <TerminalWindow>
+              {children}
+            </TerminalWindow>
+          </div>
+        </TerminalProvider>
       </body>
     </html>
   );

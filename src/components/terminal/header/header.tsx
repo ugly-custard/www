@@ -2,19 +2,19 @@
 
 import { Face } from './face'
 
-interface TerminalHeaderProps {
+interface HeaderProps {
   isFullscreen: boolean
   onMouseDown: (e: React.MouseEvent) => void
   onDoubleClick: () => void
   onToggleFullscreen: () => void
 }
 
-export function TerminalHeader({
+export function Header({
   isFullscreen,
   onMouseDown,
   onDoubleClick,
   onToggleFullscreen,
-}: TerminalHeaderProps) {
+}: HeaderProps) {
   return (
     <header
       className={`relative flex items-center justify-between overflow-hidden px-4 py-3 ${isFullscreen ? 'cursor-default lg:cursor-pointer' : 'cursor-default lg:cursor-grab lg:active:cursor-grabbing'

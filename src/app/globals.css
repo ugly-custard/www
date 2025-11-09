@@ -23,6 +23,8 @@
 
   body {
     background-color: #1e1e1e;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    line-height: 1.6;
   }
 }
 
@@ -109,6 +111,19 @@
   }
 }
 
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
 .animate-wave-shadow {
   animation: animate-wave-shadow 8s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { TerminalHeader } from './header/terminal-header'
+import { Header } from './header'
 
 interface TerminalWindowProps {
   children: React.ReactNode
@@ -72,11 +72,8 @@ export function TerminalWindow({ children }: TerminalWindowProps) {
     }
   }, [dragging, offset])
 
-  useEffect(() => {
-    if (isMobile) {
-      setPosition({ x: 0, y: 0 })
-    }
-  }, [isMobile])
+  // Calculate effective position (mobile always at 0,0)
+  const effectivePosition = isMobile ? { x: 0, y: 0 } : position
 
   return (
     <main
@@ -84,11 +81,11 @@ export function TerminalWindow({ children }: TerminalWindowProps) {
       className={`z-10 flex h-dvh w-dvw flex-col overflow-hidden bg-gradient-to-tr from-ash-800 to-ash-700 opacity-100 lg:h-[75dvh] lg:w-[70dvw] ${isFullscreen || isMobile ? 'rounded-none' : 'rounded-xl animate-wave-shadow'
         }`}
       style={{
-        transform: `translate(${position.x}px, ${position.y}px)`,
+        transform: `translate(${effectivePosition.x}px, ${effectivePosition.y}px)`,
         transition: dragging ? 'none' : 'all 0.2s ease-out',
       }}
     >
-      <TerminalHeader
+      <Header
         isFullscreen={isFullscreen}
         onMouseDown={onMouseDown}
         onDoubleClick={toggleFullscreen}

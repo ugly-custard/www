@@ -1,0 +1,7 @@
+export { helpHandler } from './help'
+export { fastfetchHandler } from './fastfetch'
+export { clearHandler } from './clear'
+export { lsHandler } from './ls'
+export { cdHandler } from './cd'
+export { pwdHandler } from './pwd'
+export { catHandler } from './cat'
