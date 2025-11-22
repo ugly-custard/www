@@ -183,14 +183,37 @@ export function resolvePath(currentPath: string, targetPath: string): string {
 }
 
 export function getNode(path: string): VirtualFile | null {
-  const parts = path.split('/').filter(Boolean)
-  let current: VirtualFile | undefined = fileSystem.home
+  // Handle root path
+  if (path === '/') {
+    return {
+      name: '/',
+      type: 'directory',
+      children: fileSystem
+    }
+  }
 
-  for (const part of parts) {
-    if (!current || current.type !== 'directory' || !current.children) {
+  const parts = path.split('/').filter(Boolean)
+  
+  // Start from the root of fileSystem
+  let current: VirtualFile | undefined = undefined
+  
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i]
+    
+    if (i === 0) {
+      // First part - access from fileSystem root
+      current = fileSystem[part]
+    } else {
+      // Subsequent parts - traverse through children
+      if (!current || current.type !== 'directory' || !current.children) {
+        return null
+      }
+      current = current.children[part]
+    }
+    
+    if (!current) {
       return null
     }
-    current = current.children[part]
   }
 
   return current || null

@@ -6,7 +6,7 @@ export const cdHandler: CommandHandler = ({ currentPath, args }) => {
     return {
       output: '',
       type: 'success',
-      newPath: '/home/ugly-custard'
+      newPath: '/home/ugly'
     }
   }
 
